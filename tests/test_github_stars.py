@@ -17,7 +17,7 @@ def test_api_get():
 
 
 def test_get_github_stars():
-    with patch("github_stars.api_get") as mocked_api_get:
+    with patch("github_stars.api.api_get") as mocked_api_get:
         mocked_api_get.side_effect = [
             ([{"repo": "test_repo"}], {"url": "next_url"}),
             ([{"repo": "test_repo2"}], None),
