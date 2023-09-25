@@ -1,11 +1,10 @@
-import json
 from typing import Dict, List, Union
 
 import requests
 
 from constants import USER_AGENT
 
-BASE_URL = "https://api.github.com/users/{}/starred?per_page={}"
+BASE_URL = "https://api.github.com/users/{}/starred"
 
 
 def api_get(
@@ -24,7 +23,7 @@ def get_github_stars(username: str, per_page: int = 100) -> List[Dict]:
         "Accept": "application/vnd.github.v3.star+json",
         "User-Agent": USER_AGENT,
     }
-    params = {"per_page": 100}
+    params = {"per_page": per_page}
 
     while url:
         results, next_page = api_get(url, headers, params)
@@ -38,12 +37,6 @@ def get_github_stars(username: str, per_page: int = 100) -> List[Dict]:
     return starred_repos
 
 
-def write_to_file(data: List[Dict], filename: str = "github_stars.json"):
-    with open(filename, "w") as f:
-        json.dump(data, fp=f, indent=4)
-
-
 if __name__ == "__main__":
     username = "Scarvy"
     starred_repos = get_github_stars(username)
-    write_to_file(starred_repos)
