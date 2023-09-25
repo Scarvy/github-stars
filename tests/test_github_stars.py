@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 import pytest
 
-from github_stars import api_get, get_github_stars
+from github_stars.api import api_get, get_github_stars
 
 
 def test_api_get():

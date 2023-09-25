@@ -2,7 +2,7 @@ from typing import Dict, List, Union
 
 import requests
 
-from constants import USER_AGENT
+from .constants import USER_AGENT
 
 BASE_URL = "https://api.github.com/users/{}/starred"
 
@@ -17,6 +17,15 @@ def api_get(
 
 
 def get_github_stars(username: str, per_page: int = 100) -> List[Dict]:
+    """Get a list of repositories starred by a user.
+
+    Args:
+        username (str): The handle for the GitHub user account.
+        per_page (int, optional): The number of results per page. Defaults to 100.
+
+    Returns:
+        List[Dict]: Lists of repositories a user has starred.
+    """
     starred_repos = []
     url = BASE_URL.format(username, per_page)
     headers = {
@@ -35,8 +44,3 @@ def get_github_stars(username: str, per_page: int = 100) -> List[Dict]:
             url = None
 
     return starred_repos
-
-
-if __name__ == "__main__":
-    username = "Scarvy"
-    starred_repos = get_github_stars(username)
