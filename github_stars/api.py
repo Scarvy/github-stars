@@ -1,15 +1,15 @@
-from typing import Dict, List, Union
+from typing import Dict, List, Tuple
 
 import requests
 
-from .constants import USER_AGENT
+from github_stars.constants import USER_AGENT
 
 BASE_URL = "https://api.github.com/users/{}/starred"
 
 
 def api_get(
-    url: str, headers: Dict[str, str], params: Dict[str, Union[str, int]]
-) -> Union[List, Dict]:
+    url: str, headers: Dict[str, str], params: Dict[str, int]
+) -> Tuple[List[Dict], Dict]:
     response = requests.get(url, headers=headers, params=params)
     if response.status_code != 200:
         raise Exception(f"API Error: {response.status_code}")
@@ -41,6 +41,6 @@ def get_github_stars(username: str, per_page: int = 100) -> List[Dict]:
         if next_page:
             url = next_page["url"]
         else:
-            url = None
+            url = ""
 
     return starred_repos
