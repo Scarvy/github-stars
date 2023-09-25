@@ -2,7 +2,7 @@ from typing import Dict, List, Tuple
 
 import requests
 
-from github_stars.constants import USER_AGENT
+from .constants import USER_AGENT
 
 BASE_URL = "https://api.github.com/users/{}/starred"
 
