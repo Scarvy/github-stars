@@ -1,1 +1,1 @@
-USER_AGENT = "github-stars/0.0.1"
+USER_AGENT = "github-stars/1.0.0"
