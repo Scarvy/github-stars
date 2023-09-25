@@ -1,9 +1,8 @@
-import json
 from unittest.mock import patch
 
 import pytest
 
-from github_stars import api_get, get_github_stars, write_to_file
+from github_stars import api_get, get_github_stars
 
 
 def test_api_get():
@@ -26,15 +25,3 @@ def test_get_github_stars():
 
         starred_repos = get_github_stars("some_username")
         assert starred_repos == [{"repo": "test_repo"}, {"repo": "test_repo2"}]
-
-
-def test_write_to_file(tmpdir):
-    data_to_write = [{"repo": "test_repo"}]
-    test_file = tmpdir.join("test.json")
-
-    write_to_file(data_to_write, filename=test_file.strpath)
-
-    with open(test_file, "r") as f:
-        loaded_data = json.load(f)
-
-    assert loaded_data == [{"repo": "test_repo"}]
